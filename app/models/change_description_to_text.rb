@@ -1,0 +1,2 @@
+class ChangeDescriptionToText < ApplicationRecord
+end
