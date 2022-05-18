@@ -1,25 +1,70 @@
-### Products index
-GET http://localhost:3000/products
+@jwt = eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2NTI4MzE1Nzh9.VHdmryT-ksnIns_4PIsnEb8S1Rla6HhMYtpB1MiEmaI
 
-### Products create
+### Users create (signup)
+POST http://localhost:3000/users.json
+Content-Type: application/json
+
+{
+  "name": "Peter",
+  "email": "peter@test.com",
+  "password": "password",
+  "password_confirmation": "password"
+}
+
+### Sessions create (login)
+POST http://localhost:3000/sessions.json
+Content-Type: application/json
+
+{
+  "email": "test@test.com",
+  "password": "password"
+}
+
+### PRODUCTS INDEX
+GET http://localhost:3000/products.json
+
+### PRODUCTS CREATE
 POST http://localhost:3000/products.json
 Content-Type: application/json
+Authorization: Bearer {{jwt}}
 
 {
-  "name": "test name",rai 
-  "price": "test price",
-  "description": "test description",
-  "image_url": "test image_url"
+  "name": "Test name",
+  "price": 32,
+  "description": "test description"
 }
 
-### Products show
-GET http://localhost:3000/products/1
+### PRODUCTS SHOW
+GET http://localhost:3000/products/3.json
 
-### Products update
-PATCH http://localhost:3000/products/7.json
+### PRODUCTS UPDATE
+PATCH http://localhost:3000/products/8.json
 Content-Type: application/json
 
 {
-  "description": "update description",
-  "image_url": "update image"
+  "price": 100
 }
+
+### PRODUCTS DESTROY
+DELETE http://localhost:3000/products/8.json
+
+### ORDERS INDEX
+GET http://localhost:3000/orders.json
+Authorization: Bearer {{jwt}}
+
+### ORDERS CREATE
+POST http://localhost:3000/orders.json
+Content-Type: application/json
+Authorization: Bearer {{jwt}}
+
+{
+  "product_id": 2,
+  "quantity": 4,
+  "subtotal": 100,
+  "tax": 10,
+  "total": 110
+}
+
+### ORDERS SHOW
+GET http://localhost:3000/orders/3.json
+Authorization: Bearer {{jwt}}
